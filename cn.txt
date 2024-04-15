@@ -1,0 +1,73 @@
+//switch using telnet
+enable 
+configure terminal
+enable password rgukt
+interface vlan1
+ip address 10.11.13.5 255.0.0.0
+no shutdown 
+exit
+line vty 0 2
+password qwerty
+login 
+exit
+exit
+write memory
+=>on pc
+telnet 10.11.13.5
+password:
+enable
+password:
+config
+exit
+
+//router using telnet
+enable 
+configure terminal
+enable password rgukt
+interface gig0/0/0
+ip address 10.11.13.5 255.0.0.0
+no shutdown 
+line vty 0 9
+password rgukt
+login 
+exit
+exit
+write memory
+=>on pc
+telnet 10.11.13.5
+password:
+enable
+password:
+config
+exit
+
+//connecting two different networks using router
+=>cli commands
+enable
+config terminal
+interface gig0/0/0
+ip address 10.10.10.65 255.0.0.0
+no shutdown 
+exit
+interface gig0/0/1
+ip address 132.133.56.42 255.255.0.0
+no shutdown 
+exit
+exit
+write memory
+
+//configuration of dhcp service on router
+=>cli commands
+enable 
+config terminal
+interface gig0/0/0
+ip address 10.10.10.1 255.0.0.0
+no shutdown 
+exit
+ip dhcp pool mynetwork 
+network 10.0.0.0 255.0.0.0
+default-router 10.10.10.1
+dns-server 10.10.10.20
+exit
+exit
+write memory
